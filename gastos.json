@@ -1,0 +1,115 @@
+[
+  {
+    "id": 1,
+    "descricao": "Compra de supermercado",
+    "valor": 356.75,
+    "data": "2026-01-15T10:30:00.000Z",
+    "categoria": "Alimentação",
+    "subcategorias": [
+      "Supermercado",
+      "Mensal"
+    ],
+    "formaPagamento": "credito",
+    "parcelado": true,
+    "parcelas": 3,
+    "cartao": "Visa Nubank",
+    "fixo": true,
+    "prioridade": 1,
+    "status": "pago",
+    "observacoes": "Compra do mês",
+    "tags": [
+      "mercado",
+      "comida",
+      "essencial"
+    ],
+    "comprovante": "nota_supermercado_jan.pdf"
+  },
+  {
+    "id": 2,
+    "descricao": "Conta de energia elétrica",
+    "valor": 189.40,
+    "data": "2026-01-20T00:00:00.000Z",
+    "categoria": "Moradia",
+    "subcategorias": [
+      "Energia",
+      "Conta fixa"
+    ],
+    "formaPagamento": "pix",
+    "parcelado": false,
+    "fixo": true,
+    "prioridade": 1,
+    "status": "pago",
+    "observacoes": "Referente a janeiro",
+    "tags": [
+      "luz",
+      "casa",
+      "fixo"
+    ],
+    "comprovante": null
+  },
+  {
+    "id": 3,
+    "descricao": "Almoço fora",
+    "valor": 42.90,
+    "data": "2026-01-28T13:15:00.000Z",
+    "categoria": "Lazer",
+    "subcategorias": [
+      "Restaurante"
+    ],
+    "formaPagamento": "debito",
+    "parcelado": false,
+    "fixo": false,
+    "prioridade": 3,
+    "status": "pago",
+    "tags": [
+      "comida",
+      "lazer"
+    ],
+    "comprovante": null
+  },
+  {
+    "id": 4,
+    "descricao": "Mensalidade da academia",
+    "valor": 99.90,
+    "data": "2026-02-05T00:00:00.000Z",
+    "categoria": "Saúde",
+    "subcategorias": [
+      "Academia",
+      "Mensal"
+    ],
+    "formaPagamento": "credito",
+    "parcelado": false,
+    "cartao": "Mastercard Itaú",
+    "fixo": true,
+    "prioridade": 2,
+    "status": "pendente",
+    "observacoes": "Débito automático",
+    "tags": [
+      "saude",
+      "fixo"
+    ],
+    "comprovante": null
+  },
+  {
+    "id": 5,
+    "descricao": "Conserto do carro",
+    "valor": 850.00,
+    "data": "2026-02-01T16:40:00.000Z",
+    "categoria": "Transporte",
+    "subcategorias": [
+      "Manutenção"
+    ],
+    "formaPagamento": "dinheiro",
+    "parcelado": false,
+    "fixo": false,
+    "prioridade": 1,
+    "status": "atrasado",
+    "observacoes": "Troca de pastilhas e óleo",
+    "tags": [
+      "carro",
+      "emergencia"
+    ],
+    "comprovante": "recibo_mecanica.jpg"
+  }
+]
+
