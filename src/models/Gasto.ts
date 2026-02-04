@@ -2,22 +2,22 @@ export interface Gasto {
   id: number;
   descricao: string;
   valor: number;
-  data: Date;
+  data: string | null;
 
-  categoria: string;
-  subcategorias: string[];
+  categoria?: string;
+  formaPagamento?: string;
+  prioridade?: number;
+  status?: string;
 
-  formaPagamento: "credito" | "debito" | "pix" | "dinheiro";
   parcelado: boolean;
   parcelas?: number;
-  cartao?: string;
 
   fixo: boolean;
-  prioridade: number;
-  status: "pago" | "pendente" | "atrasado";
+  cartao?: string;
 
-  observacoes?: string;
+  subcategorias: string[];
   tags: string[];
 
-  comprovante?: File;
+  observacoes?: string;
+  comprovante?: string | null;
 }

@@ -3,6 +3,24 @@ import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
 import { useGastos } from "../../stores/useGastos.ts";
 
+export interface FormGasto {
+  descricao: string;
+  valor: number | null;
+  data: Date | null;
+  categoria: string;
+  formaPagamento: string;
+  prioridade: number;
+  status: string;
+  parcelado: boolean;
+  fixo: boolean;
+  parcelas: number;
+  cartao?: string;
+  subcategorias: string[];
+  tags: string[];
+  observacoes?: string;
+  comprovante?: File | null;
+}
+
 // PrimeVue
 import Dialog from "primevue/dialog";
 import InputText from "primevue/inputtext";
@@ -42,7 +60,7 @@ const schema = yup.object({
 // =====================
 // Form
 // =====================
-const { handleSubmit, resetForm } = useForm({
+const { handleSubmit, resetForm } = useForm<FormGasto>({
   validationSchema: schema,
   initialValues: {
     prioridade: 2,
@@ -81,7 +99,8 @@ const onSubmit = handleSubmit((form) => {
   const gasto = {
     id: Date.now(),
     ...form,
-    data: form.data?.toISOString(),
+    valor: form.valor!, // 👈 confia no schema
+    data: form.data ? form.data.toISOString() : null,
     comprovante: form.comprovante?.name || null,
   };
 
@@ -95,20 +114,11 @@ const onSubmit = handleSubmit((form) => {
 </script>
 
 <template>
-  <Dialog
-    v-model:visible="visible"
-    header="Novo Gasto"
-    modal
-    class="w-[40rem]"
-  >
+  <Dialog v-model:visible="visible" header="Novo Gasto" modal class="w-[40rem]">
     <form @submit.prevent="onSubmit" class="flex flex-col gap-4">
       <InputText v-model="descricao" placeholder="Descrição" />
 
-      <InputNumber
-        v-model="valor"
-        mode="currency"
-        currency="BRL"
-      />
+      <InputNumber v-model="valor" mode="currency" currency="BRL" />
 
       <Calendar v-model="data" showTime />
 

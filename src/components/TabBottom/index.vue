@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Modal from '../ModaL/index.vue'
+import Modal from '../Modal/index.vue'
 
 const modalVisible = ref(false)
 </script>
