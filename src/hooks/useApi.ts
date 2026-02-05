@@ -5,7 +5,7 @@ type Request = {
   headers?: HeadersInit;
 };
 
-const baseUrl = "http://192.168.0.99:8080/api/tests/public";
+const baseUrl = "https://painel.ongoldtech.com/api/tests/public";
 
 export async function useApi<T>({
   endpoint,

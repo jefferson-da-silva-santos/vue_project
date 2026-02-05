@@ -107,7 +107,7 @@ function handleSolicitarRecuperacao() {
 async function onSubmit() {
   try {
     const resonse = await useApi({
-      endpoint: '/login',
+      endpoint: '',
       method: 'POST',
       body: form
     });
