@@ -1,2 +1,2 @@
 # vue_project
-Primeiro projeto desenvolvido em vuejs
+Primeiro projeto desenvolvido em VueJs + Tauri
