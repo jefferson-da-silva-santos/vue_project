@@ -2,7 +2,7 @@
 import Home from './pages/Home/index.vue';
 import Nav from './components/Nav/index.vue';
 import TabBottom from './components/TabBottom/index.vue';
-import Modal from '../Modal/index.vue'
+import Modal from './components/Modal/index.vue';
 </script>
 
 <template>

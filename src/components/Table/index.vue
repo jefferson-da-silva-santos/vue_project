@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import type { Gasto } from '../../models/Gasto.ts';
 
 defineProps<{
-  gastos: Gasto[];
+  gastos: any;
 }>();
 </script>
 

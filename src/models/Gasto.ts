@@ -3,21 +3,13 @@ export interface Gasto {
   descricao: string;
   valor: number;
   data: string | null;
-
-  categoria?: string;
-  formaPagamento?: string;
-  prioridade?: number;
-  status?: string;
-
   parcelado: boolean;
   parcelas?: number;
-
-  fixo: boolean;
   cartao?: string;
-
-  subcategorias: string[];
-  tags: string[];
-
+  fixo?: boolean;
+  prioridade?: number;
+  status?: string;
   observacoes?: string;
+  tags?: string[];
   comprovante?: string | null;
 }
