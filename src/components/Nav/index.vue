@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import logo from '../../assets/image/logo.png'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function logout() {
+  router.push('/login')
+}
 </script>
 <template>
   <nav class="nav">
@@ -8,6 +14,7 @@ import logo from '../../assets/image/logo.png'
       <li>Inicio</li>
       <li>Configs</li>
       <li>Fale conosco</li>
+      <li @click="logout">Sair</li>
     </ul>
   </nav>
 </template>
