@@ -2,6 +2,21 @@
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
 import { useGastos } from "../../stores/useGastos.ts";
+import { ref } from 'vue';
+import Slider from 'primevue/slider';
+import Button from 'primevue/button';
+import ToggleSwitch from 'primevue/toggleswitch';
+import InputMask from 'primevue/inputmask';
+import Password from 'primevue/password';
+import Knob from 'primevue/knob';
+import SelectButton from 'primevue/selectbutton';
+import Rating from 'primevue/rating';
+import ColorPicker from 'primevue/colorpicker';
+import Chips from 'primevue/chips';
+import Listbox from 'primevue/listbox';
+import FloatLabel from 'primevue/floatlabel'; // Opcional, mas bom para testar UI
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
 
 export interface FormGasto {
   descricao: string;
@@ -32,7 +47,7 @@ import Checkbox from "primevue/checkbox";
 import RadioButton from "primevue/radiobutton";
 import Textarea from "primevue/textarea";
 import FileUpload from "primevue/fileupload";
-import Button from "primevue/button";
+
 
 // =====================
 // Modal
@@ -110,35 +125,131 @@ const onSubmit = handleSubmit((form) => {
   visible.value = false;
 
   console.log("💸 Gasto salvo:", gasto);
+
 });
+
+const value = ref(null);
+const checked = ref(false);
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" header="Novo Gasto" modal class="w-[40rem]">
-    <form @submit.prevent="onSubmit" class="flex flex-col gap-4">
+  <Dialog v-model:visible="visible" header="Laboratório de Testes PrimeVue" modal class="w-[50rem]">
+    <form @submit.prevent="onSubmit" class="flex flex-col gap-6 p-2">
+      
+      <div class="grid grid-cols-2 gap-4">
+        <IconField>
+          <InputIcon class="pi pi-search" />
+          <InputText v-model="descricao" placeholder="Busca interna (IconField)" class="w-full" />
+        </IconField>
+
+        <InputMask v-model="value" mask="99/99/9999" placeholder="Data com Máscara" class="w-full" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <FloatLabel>
+          <InputText id="username" v-model="descricao" class="w-full" />
+          <label for="username">Float Label Test</label>
+        </FloatLabel>
+
+        <Password v-model="value" placeholder="Campo Senha" toggleMask class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold">Tags (Chips):</label>
+        <Chips v-model="tags" placeholder="Digite e dê enter" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold">Avaliação (Rating):</label>
+          <Rating v-model="prioridade" :stars="5" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="font-bold">Cor do Item:</label>
+          <ColorPicker v-model="value" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold">Prioridade (SelectButton):</label>
+        <SelectButton 
+          v-model="prioridade" 
+          :options="[{label: 'Baixa', value: 1}, {label: 'Média', value: 2}, {label: 'Alta', value: 3}]" 
+          optionLabel="label" 
+          optionValue="value" 
+        />
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 items-center">
+        <div class="flex flex-col gap-4">
+          <label class="font-bold">Volume (Slider: {{prioridade}})</label>
+          <Slider v-model="prioridade" :min="0" :max="100" />
+        </div>
+        
+        <div class="flex flex-col items-center gap-2">
+          <label class="font-bold">Progresso (Knob):</label>
+          <Knob v-model="prioridade" :size="80" />
+        </div>
+      </div>
+
+      <hr class="border-t border-gray-200 my-2" />
+
+      <div class="grid grid-cols-2 gap-4">
+        <Listbox v-model="categoria" :options="['Opção A', 'Opção B', 'Opção C']" class="w-full" />
+        
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <ToggleSwitch v-model="checked" />
+            <span>Ativar Notificações</span>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <Checkbox v-model="parcelado" binary />
+            <span>Confirmar Termos</span>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-2">
+              <RadioButton v-model="status" value="pago" />
+              <label>Pago</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <RadioButton v-model="status" value="pendente" />
+              <label>Pendente</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Textarea v-model="observacoes" rows="3" placeholder="Observações detalhadas..." autoResize />
+
+      <FileUpload 
+        mode="advanced" 
+        name="demo[]" 
+        url="/api/upload" 
+        accept="image/*" 
+        :maxFileSize="1000000"
+        label="Upload Avançado"
+        chooseLabel="Escolher"
+        uploadLabel="Enviar"
+        cancelLabel="Cancelar"
+      />
+      
       <InputText v-model="descricao" placeholder="Descrição" />
 
       <InputNumber v-model="valor" mode="currency" currency="BRL" />
 
       <Calendar v-model="data" showTime />
 
-      <Dropdown
-        v-model="categoria"
-        :options="['Alimentação', 'Moradia', 'Lazer', 'Saúde', 'Transporte']"
-        placeholder="Categoria"
-      />
+      <Dropdown v-model="categoria" :options="['Alimentação', 'Moradia', 'Lazer', 'Saúde', 'Transporte']"
+        placeholder="Categoria" />
 
-      <MultiSelect
-        v-model="subcategorias"
-        :options="['Mensal', 'Supermercado', 'Conta fixa', 'Emergência']"
-        placeholder="Subcategorias"
-      />
+      <MultiSelect v-model="subcategorias" :options="['Mensal', 'Supermercado', 'Conta fixa', 'Emergência']"
+        placeholder="Subcategorias" />
 
-      <Dropdown
-        v-model="formaPagamento"
-        :options="['credito', 'debito', 'pix', 'dinheiro']"
-        placeholder="Forma de pagamento"
-      />
+      <Dropdown v-model="formaPagamento" :options="['credito', 'debito', 'pix', 'dinheiro']"
+        placeholder="Forma de pagamento" />
 
       <div class="flex gap-6 items-center">
         <Checkbox v-model="parcelado" binary />
@@ -148,18 +259,9 @@ const onSubmit = handleSubmit((form) => {
         <span>Gasto fixo</span>
       </div>
 
-      <InputNumber
-        v-if="parcelado"
-        v-model="parcelas"
-        :min="1"
-        placeholder="Parcelas"
-      />
+      <InputNumber v-if="parcelado" v-model="parcelas" :min="1" placeholder="Parcelas" />
 
-      <InputText
-        v-if="formaPagamento === 'credito'"
-        v-model="cartao"
-        placeholder="Cartão"
-      />
+      <InputText v-if="formaPagamento === 'credito'" v-model="cartao" placeholder="Cartão" />
 
       <div class="flex gap-6 items-center">
         <RadioButton v-model="prioridade" :value="1" /> Alta
@@ -167,27 +269,24 @@ const onSubmit = handleSubmit((form) => {
         <RadioButton v-model="prioridade" :value="3" /> Baixa
       </div>
 
-      <Dropdown
-        v-model="status"
-        :options="['pago', 'pendente', 'atrasado']"
-        placeholder="Status"
-      />
+      <Dropdown v-model="status" :options="['pago', 'pendente', 'atrasado']" placeholder="Status" />
 
-      <MultiSelect
-        v-model="tags"
-        :options="['fixo', 'lazer', 'essencial', 'emergencia']"
-        placeholder="Tags"
-      />
+      <MultiSelect v-model="tags" :options="['fixo', 'lazer', 'essencial', 'emergencia']" placeholder="Tags" />
 
       <Textarea v-model="observacoes" rows="3" />
 
-      <FileUpload
-        mode="basic"
-        chooseLabel="Comprovante"
-        @select="(e) => (comprovante = e.files[0])"
-      />
+      <FileUpload mode="basic" chooseLabel="Comprovante" @select="(e) => (comprovante = e.files[0])" />
 
+
+
+      <Slider v-model="value" class="w-56" />
+
+      <ToggleSwitch v-model="checked" />
       <Button label="Salvar Gasto" type="submit" />
     </form>
+      <div class="flex justify-end gap-3 mt-4">
+        <Button label="Cancelar" icon="pi pi-times" severity="danger" variant="text" @click="visible = false" />
+        <Button label="Salvar Gasto" icon="pi pi-check" type="submit" severity="success" raised />
+      </div>
   </Dialog>
 </template>
