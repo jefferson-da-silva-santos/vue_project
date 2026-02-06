@@ -1,5 +1,6 @@
 <template>
   <div class="container-login">
+    <Toast />
     <div class="container-login__group">
       <aside class="container-login__group__banner">
         <h1 class="container-login__group__banner__title">
@@ -66,7 +67,11 @@
 import { reactive, ref, computed } from 'vue'
 import { useApi } from '../../hooks/useApi'
 import { useRouter } from 'vue-router';
+import { useToast } from "primevue/usetoast";
+import Toast from 'primevue/toast';
+
 const router = useRouter()
+const toast = useToast();
 // Estado do formulário
 const form = reactive({
   email: '',
@@ -105,17 +110,35 @@ function handleSolicitarRecuperacao() {
 }
 
 async function onSubmit() {
+  isLoading.value = true;
   try {
-    const resonse = await useApi({
-      endpoint: '',
+    const response = await useApi({
+      endpoint: '', // Coloque seu endpoint real
       method: 'POST',
       body: form
     });
-    if (resonse) {
-      router.push('/');
+
+    if (response) {
+      // 3. Feedback de Sucesso
+      toast.add({
+        severity: 'success',
+        summary: 'Login realizado',
+        detail: 'Bem-vindo de volta!',
+        life: 3000
+      });
+
+      setTimeout(() => router.push('/'), 1000);
     }
   } catch (error) {
-    alert(error);
+    // 4. Feedback de Erro
+    toast.add({
+      severity: 'error',
+      summary: 'Falha no Login',
+      detail: 'Usuário ou senha inválidos',
+      life: 5000
+    });
+  } finally {
+    isLoading.value = false;
   }
 }
 </script>

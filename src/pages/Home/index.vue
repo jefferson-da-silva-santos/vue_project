@@ -20,26 +20,33 @@ import Skeleton from 'primevue/skeleton';
 const value = ref('');
 const { gastos } = useGastos();
 const data = ref({
+    key: 'root',
     label: 'Argentina',
     children: [
         {
+            key: 'arg-1',
             label: 'Argentina',
             children: [
                 {
+                    key: 'arg-1-1',
                     label: 'Argentina'
                 },
                 {
+                    key: 'arg-1-2',
                     label: 'Croatia'
                 }
             ]
         },
         {
+            key: 'fr-1',
             label: 'France',
             children: [
                 {
+                    key: 'fr-1-1',
                     label: 'France'
                 },
                 {
+                    key: 'fr-1-2',
                     label: 'Morocco'
                 }
             ]

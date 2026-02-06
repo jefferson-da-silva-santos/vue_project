@@ -128,8 +128,13 @@ const onSubmit = handleSubmit((form) => {
 
 });
 
-const value = ref(null);
-const checked = ref(false);
+const value = ref<number | number[] | undefined>(undefined);
+const checked = ref<boolean>(false);
+
+// Remova aquela variável 'value' genérica e use nomes específicos:
+const dataMask = ref<string | undefined>(undefined); // Para o InputMask
+const senha = ref<string | undefined>(undefined);    // Para o Password
+const valorKnob = ref<number>(0);                    // Exemplo para um Knob ou Slider
 </script>
 
 <template>
@@ -142,7 +147,7 @@ const checked = ref(false);
           <InputText v-model="descricao" placeholder="Busca interna (IconField)" class="w-full" />
         </IconField>
 
-        <InputMask v-model="value" mask="99/99/9999" placeholder="Data com Máscara" class="w-full" />
+        <InputMask v-model="dataMask" mask="99/99/9999" placeholder="Data com Máscara" class="w-full" />
       </div>
 
       <div class="grid grid-cols-2 gap-4">
@@ -151,7 +156,7 @@ const checked = ref(false);
           <label for="username">Float Label Test</label>
         </FloatLabel>
 
-        <Password v-model="value" placeholder="Campo Senha" toggleMask class="w-full" />
+        <Password v-model="senha" placeholder="Campo Senha" toggleMask class="w-full" />
       </div>
 
       <div class="flex flex-col gap-2">
