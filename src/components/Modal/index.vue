@@ -134,7 +134,6 @@ const checked = ref<boolean>(false);
 // Remova aquela variável 'value' genérica e use nomes específicos:
 const dataMask = ref<string | undefined>(undefined); // Para o InputMask
 const senha = ref<string | undefined>(undefined);    // Para o Password
-const valorKnob = ref<number>(0);                    // Exemplo para um Knob ou Slider
 </script>
 
 <template>
