@@ -8,6 +8,7 @@ import ToastService from "primevue/toastservice";
 import "boxicons/css/boxicons.min.css";
 import router from "./router";
 
+
 const app = createApp(App).use(router);
 app.use(ToastService);
 

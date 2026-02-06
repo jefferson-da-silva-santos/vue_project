@@ -689,4 +689,10 @@ form {
   margin-bottom: 2rem;
 }
 
+.p-dialog {
+  max-width: 99vw !important;
+  height: 96% !important;
+  padding: 0rem !important;
+}
+
 /*# sourceMappingURL=styles.css.map */

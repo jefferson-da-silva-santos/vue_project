@@ -16,6 +16,10 @@ import MeterGroup from 'primevue/metergroup';
 import ProgressBar from 'primevue/progressbar';
 import ProgressSpinner from 'primevue/progressspinner';
 import Skeleton from 'primevue/skeleton';
+import { Button } from "primevue";
+import Dialog from "primevue/dialog";
+
+const mostrarPdf = ref(false);
 
 const value = ref('');
 const { gastos } = useGastos();
@@ -188,4 +192,10 @@ const value2 = ref([
       </div>
     </div>
   </div>
+ <Button label="Ver PDF" icon="pi pi-file-pdf" severity="danger" @click="mostrarPdf = true" />
+
+  <!-- 🪟 MODAL FLUTUANTE -->
+  <Dialog v-model:visible="mostrarPdf" modal header="Visualização do PDF" style="width: 99vw" :closable="true">
+    <embed src="../../../JavaScript.pdf" type="application/pdf" width="100%" height="600px" />
+  </Dialog>
 </template>
